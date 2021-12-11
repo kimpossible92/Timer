@@ -116,6 +116,8 @@ public class Timer : MonoBehaviour
                     }
                     arrow = CurrentArrow.gameObject; hourTimer = arrowTime; timekoef = 12;
                     if (arrow != null) arrow.transform.parent.rotation = Quaternion.Euler(0, 0, (arrowTime) * (360 / timekoef));
+                    if (arrowTime >= 24) { arrowTime = 0; }
+                    if (arrowTime < 0) { arrowTime = 23; }
                 }
                 if (CurrentArrow._Unit == UnitTime.Minute) {
                     if (Input.mousePosition.x > starpos)
@@ -128,6 +130,8 @@ public class Timer : MonoBehaviour
                     }
                     arrow = CurrentArrow.gameObject; minuteTimer = arrowTime; timekoef = 60;
                     if (arrow != null) arrow.transform.parent.rotation = Quaternion.Euler(0, 0, (arrowTime) * (360 / timekoef));
+                    if (arrowTime >= 60) { arrowTime = 0; }
+                    if (arrowTime < 0) { arrowTime = 59; }
                 }
                
                 //if (arrow != null) arrow.transform.parent.rotation = Quaternion.Euler(0, 0, (arrowTime) * (360 / timekoef));
@@ -143,10 +147,6 @@ public class Timer : MonoBehaviour
         minute = _timespan.Minute;
         second = _timespan.Second;
         GetTime.text = _timespan.ToString();
-        if (hourTimer>=24) { hourTimer = 0; }
-        if (minuteTimer>=60) { minuteTimer = 0; }
-        if (hourTimer <= 0) { hourTimer = 0; }
-        if (minuteTimer <= 0) { minuteTimer = 0; }
         Ghour.transform.rotation = Quaternion.Euler(0, 0, (hour) * (360 / 12));
         Gminute.transform.rotation = Quaternion.Euler(0, 0, minute * (360 / 60));
         Gsecond.transform.rotation = Quaternion.Euler(0, 0, second * (360 / 60));
